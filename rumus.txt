@@ -1,0 +1,8 @@
+nilai sub faktor =  ps_nilai/jumlah responden
+ps nilai = hasil jumlah kuisioner responden per sub
+
+bobot absolut = bobot karakteristik * bobot subkarakteristik
+
+nilai absolut = bobot absolut * nilai sub faktor
+
+total nilai absolut tiap faktor kualitas = sum of nilai absolut
