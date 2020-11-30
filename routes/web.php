@@ -80,4 +80,5 @@ Route::group(['prefix' => 'softwaretester',  'middleware' => 'is_user'], functio
 
 	//automatic
 	Route::get('/automatic/{id}', 'PSController@index')->name('automatic');
+	Route::get('/capacity/subkarakteristik{id}','subkarakteristikController@capacity')->name('capacity.subs');
 });

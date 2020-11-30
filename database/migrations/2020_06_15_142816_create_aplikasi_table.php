@@ -18,6 +18,7 @@ class CreateAplikasiTable extends Migration
             $table->increments('a_id')->unique();
             $table->integer('id')->unsigned();
             $table->string('a_nama');
+            $table->string('a_url');
             $table->float('a_total');
             $table->timestamps();
         });

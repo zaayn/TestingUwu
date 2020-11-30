@@ -78,12 +78,19 @@
                     <td>{{ $subkarakteristik->bobot_absolut }}</td>
                     <td>{{ $subkarakteristik->nilai_subfaktor }}</td>
                     <td>{{ $subkarakteristik->nilai_absolut }}
-
+                    @if ($subkarakteristik->sk_nama == "Capacity")
                     <td>
-                        <a href="{{route('edit.subs',$subkarakteristik->sk_id)}}" class="btn btn-info btn-sm">
+                      <a href="{{route('capacity.subs',$subkarakteristik->sk_id)}}" class="btn btn-info btn-sm">
                         <span class="fa fa-pencil"></span>
-                        </a>
+                      </a>
                     </td>
+                    @else
+                    <td>
+                      <a href="{{route('edit.subs',$subkarakteristik->sk_id)}}" class="btn btn-info btn-sm">
+                      <span class="fa fa-pencil"></span>
+                      </a>
+                    </td>   
+                    @endif
                 </tr>
                 @endforeach
               </tbody>

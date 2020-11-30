@@ -70,7 +70,8 @@ class AplikasiController extends Controller
         $aplikasi = new aplikasi;
         $aplikasi->a_id      = $apps+1;
         $aplikasi->id        = Auth::user()->id;
-        $aplikasi->a_nama    = $request->a_nama;  
+        $aplikasi->a_nama    = $request->a_nama;
+        $aplikasi->a_url     = $request->a_url;
         $aplikasi->a_total   = 0;
         $aplikasi->save();
 
