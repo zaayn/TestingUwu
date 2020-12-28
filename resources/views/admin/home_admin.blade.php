@@ -71,7 +71,7 @@
     <div class="col-md-12" style="padding:20px;">
         <div class="col-md-12 padding-0">
                 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="{{asset('/admin/karakteristik')}}">
                         <div class="panel box-v1">
                           <div class="panel-heading bg-white border-none">
@@ -80,19 +80,18 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                <h4>
-                               <span class="icon-user icons icon text-right"></span>
+                               <!-- <span class="icon-user icons icon text-right"></span> -->
                                </h4>
                             </div>
                           </div>
                           <div class="panel-body text-center">
                             <h1>{{$karakteristik}}</h1>
-                            <p>User active</p>
                             <hr/>
                           </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="{{asset('/admin/tambahbobot')}}">
                         <div class="panel box-v1">
                           <div class="panel-heading bg-white border-none">
@@ -101,40 +100,57 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                <h4>
-                               <span class="icon-basket-loaded icons icon text-right"></span>
+                               <!-- <span class="icon-basket-loaded icons icon text-right"></span> -->
                                </h4>
                             </div>
                           </div>
                           <div class="panel-body text-center">
                             <h1>{{$subkarakteristik}}</h1>
-                            <p>New Orders</p>
                             <hr/>
                           </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="{{asset('/admin/kelolaadmin')}}">
-                        <div class="panel box-v1">
-                          <div class="panel-heading bg-white border-none">
-                            <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                              <h4 class="text-left">Admin</h4>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                               <h4>
-                               <span class="icon-basket-loaded icons icon text-right"></span>
-                               </h4>
-                            </div>
+                      <div class="panel box-v1">
+                        <div class="panel-heading bg-white border-none">
+                          <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                            <h4 class="text-left">Admin</h4>
                           </div>
-                          <div class="panel-body text-center">
-                            <h1>{{$admin}}</h1>
-                            <p>New Orders</p>
-                            <hr/>
+                          <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                              <h4>
+                              <!-- <span class="icon-basket-loaded icons icon text-right"></span> -->
+                              </h4>
                           </div>
                         </div>
+                        <div class="panel-body text-center">
+                          <h1>{{$admin}}</h1>
+                          <hr/>
+                        </div>
+                      </div>
                     </a>
                 </div>
-
+                <div class="col-md-3">
+                    <a href="{{asset('/admin/kelolasoftwaretester')}}">
+                      <div class="panel box-v1">
+                        <div class="panel-heading bg-white border-none">
+                          <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                            <h4 class="text-left">Software Tester</h4>
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                              <h4>
+                              <!-- <span class="icon-basket-loaded icons icon text-right"></span> -->
+                              </h4>
+                          </div>
+                        </div>
+                        <div class="panel-body text-center">
+                          <h1>{{$softwaretester}}</h1>
+                          <hr/>
+                        </div>
+                      </div>
+                    </a>
+                </div>
         </div>
     </div>
 </div>

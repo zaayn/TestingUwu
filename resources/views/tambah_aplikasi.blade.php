@@ -19,17 +19,21 @@
         <div class="panel-heading"><h3>Spesifikasi Aplikasi</h3></div>
           <div class="panel-body">
 
-            <form action="{{route('store.aplikasi')}}" method="post">
+            <form action="{{route('store.aplikasi')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }} 
                 <div class="form-group">
                   <label>Nama Aplikasi :</label>
                   <div><input type="text" class="form-control"  name="a_nama" required></div>
-                </div>
+                </div>                
                 <div class="form-group">
                   <label>Url :</label>
                   <div><input type="text" class="form-control"  name="a_url" required></div>
-                </div>           
-
+                </div> 
+                <div class="form-group">
+                  <label>File :</label>
+                  <div><input type="file"  name="a_file" required></div>
+                </div> 
+                
                 <button type="submit" class="btn btn-primary ">Submit</button>
                 <a onclick="return confirm('Perubahan anda belum disimpan. Tetap tinggalkan halaman ini ?')" href="{{('/home')}}" class="btn btn-secondary"> Cancel</a>
             </form>

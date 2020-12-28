@@ -14,11 +14,11 @@ class CreateKarakteristikTable extends Migration
     public function up()
     {
         Schema::create('karakteristik', function (Blueprint $table) {
-            $table->increments('k_id')->unique();
+            $table->increments('k_id')->unique();                        
             $table->integer('a_id')->unsigned();
             $table->string('k_nama');
-            $table->float('k_bobot');
-            $table->float('nilai');
+            $table->decimal('k_bobot',8,2);
+            $table->decimal('k_nilai',8,2);
         });
         Schema::table('karakteristik', function($table){
             $table->foreign('a_id')

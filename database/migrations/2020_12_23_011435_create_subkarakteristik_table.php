@@ -17,12 +17,12 @@ class CreateSubkarakteristikTable extends Migration
             $table->increments('sk_id')->unique();
             $table->integer('k_id')->unsigned();
             $table->string('sk_nama');
-            $table->float('bobot_relatif');
-            $table->integer('ps_nilai');
-            $table->integer('jumlah_responden');
-            $table->float('bobot_absolut');
-            $table->float('nilai_subfaktor');
-            $table->float('nilai_absolut');
+            $table->decimal('bobot_relatif',8,2);
+            $table->decimal('bobot_absolut',8,2);
+            $table->decimal('nilai_subfaktor',8,2);
+            $table->decimal('nilai_absolut',8,2);
+            $table->integer('jml_res');
+            $table->integer('total_per_sub');
         });
         Schema::table('subkarakteristik', function($table){
             $table->foreign('k_id')

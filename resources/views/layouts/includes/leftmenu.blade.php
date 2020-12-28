@@ -16,7 +16,7 @@
             </center>
             </li>
             <li class="active ripple">
-              <a class="tree-toggle nav-header" href="/home">
+              <a class="tree-toggle nav-header" href="{{route('softwaretester.home')}}">
                 <span class="fa-home fa"></span> Home 
               </a>
             </li>
@@ -26,19 +26,9 @@
               </a>
             </li>
             <li class="ripple">
-              <a class="tree-toggle nav-header" href="/home">
+              <a class="tree-toggle nav-header" href="{{route('view.bobot')}}">
                 <span class="fa-balance-scale fa" ></span> Bobot
               </a>
-            </li>
-            <li class="ripple">
-              <a class="tree-toggle nav-header" href="/home">
-                <span class="fa-pencil fa"></span> Uji Software
-               </a>
-            </li>
-            <li class="ripple">
-              <a class="tree-toggle nav-header" href="/home">
-                <span class="fa-book fa"></span> Ekspor Hasil Uji
-               </a>
             </li>
         </ul>
       </div>

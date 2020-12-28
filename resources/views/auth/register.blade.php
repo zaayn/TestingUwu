@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password" class="text-normal text-dark">{{ __('Password') }}</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
                 </div>
 
                 <div class="form-group ">

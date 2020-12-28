@@ -29,7 +29,13 @@
 
             <li class="ripple">
               <a class="tree-toggle nav-header" href="/admin/kelolaadmin">
-                <span class="fa-book fa"></span> Kelola Admin
+                <span class="fa-book fa"></span> Administrator
+               </a>
+            </li>
+
+            <li class="ripple">
+              <a class="tree-toggle nav-header" href="/admin/kelolasoftwaretester">
+                <span class="icon-user icons"></span> Software Tester
                </a>
             </li>
         </ul>

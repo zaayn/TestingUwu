@@ -1,0 +1,22 @@
+- to get class name in php :
+get_class ([ object $object ] ) : string
+(ref : https://www.php.net/manual/en/function.get-class.php)
+
+- to get variable :
+In PHP, a variable starts with the $ sign, followed by the name of the variable
+(ref : https://www.w3schools.com/php/php_variables.asp)
+variable di php ditandai dengan $, jadi ciri unik var nya '$', jadi carinya .... yg depannya '$'
+gimana nulisnya ? :)
+
+-to get function name :
+__FUNCTION__ 
+(ref : https://stackoverflow.com/questions/1006248/how-do-i-get-the-function-name-inside-a-function-in-php#:~:text=The%20accurate%20way%20is%20to,FUNCTION__%20predefined%20magic%20constant.&text=Result%3A%20MethodA%20.&text=You%20can%20use%20the%20magic,or%20a%20function...%20%3D))
+
+- to get var of a difine class / obj
+get_object_vars
+(ref : https://www.php.net/manual/en/function.get-object-vars.php)
+
+
+-to Reads entire file into a string
+file_get_contents
+

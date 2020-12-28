@@ -10,29 +10,27 @@ use Illuminate\Support\Facades\Hash;
 use App\Aplikasi;
 use App\Karakteristik;
 use App\Subkarakteristik;
+use App\PenilaianKarakteristik;
+use App\PenilaianSubKarakteristik;
+use Illuminate\Support\Facades\Storage;
 
 class AplikasiController extends Controller
 {
     public function index()
     {
-        $data['aplikasis'] = Aplikasi::all();
+        $data['no'] = 1;
+        $data['aplikasis'] = Aplikasi::where('id',Auth::user()->id)->get();
         return view('/aplikasi',$data);
     }
     public function nilai($a_id)
     {
         $data['no'] = 1;
         $data['aplikasis'] = Aplikasi::where('a_id',$a_id)->get();
-        // $data['karakteristiks'] = Karakteristik::all();
-        // return $a_id;
-        // $data['subkarakteristiks'] = Subkarakteristik::whereHas('karakteristik', function($query){
-        //     $query->where('a_id', $a_id);
-        // })->get();
         $data['subkarakteristiks'] = DB::table('subkarakteristik')
-        ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
-        ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
-        ->where('aplikasi.a_id',$a_id)->get();
-        
-        return view('/nilai_app',$data);
+                                    ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
+                                    ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
+                                    ->where('aplikasi.a_id',$a_id)->get();
+        return view('/nilai_app', $data);
     }
 
     public function insert()
@@ -60,120 +58,56 @@ class AplikasiController extends Controller
 
     public function store(Request $request)
     {
-        $apps = Aplikasi::all()->count();
-        $karakteristik = Karakteristik::all()->count();
-        $karakteristik+=1;
-
-        $subkarakteristik = Subkarakteristik::all()->count();
-        $subkarakteristik+=1;
+        $file = $request->file('a_file');
+        
+        $file->move(public_path()."/file/",$file->getClientOriginalName()); 
 
         $aplikasi = new aplikasi;
-        $aplikasi->a_id      = $apps+1;
+
         $aplikasi->id        = Auth::user()->id;
         $aplikasi->a_nama    = $request->a_nama;
         $aplikasi->a_url     = $request->a_url;
-        $aplikasi->a_total   = 0;
-        $aplikasi->save();
+        $aplikasi->a_file    = $file->getClientOriginalName();
+        $aplikasi->a_nilai   = 0;
+        $aplikasi->save();        
 
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Functional Suitability', 0.21, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Performance Efficiency', 0.24, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Compatibility', 0.05, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Usability', 0.12, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Reliability', 0.08, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Security', 0.20, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Maintainability', 0.05, 0]);
-        DB::insert('insert into karakteristik (k_id, a_id, k_nama, k_bobot, nilai) values(?,?,?,?,?)',
-        [$karakteristik++, $aplikasi->a_id,'Portability', 0.05, 0]);
-
-        $no1 = $karakteristik-8;
-        $no2 = $karakteristik-7;
-        $no3 = $karakteristik-6;
-        $no4 = $karakteristik-5;
-        $no5 = $karakteristik-4;
-        $no6 = $karakteristik-3;
-        $no7 = $karakteristik-2;
-        $no8 = $karakteristik-1;
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no1,'Functional Completeness',0.37,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no1,'Functional Correctness',0.32,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no1,'Functional Appropriateness',0.31,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no2,'Time Behaviour',0.40,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no2,'Resource Utilization',0.20,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no2,'Capacity',0.40,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no3,'Co-Existence',0.45,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no3,'Interoperability',0.55,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'Appropriateness Recognizability',0.19,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'Learnability',0.15,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'Operability',0.22,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'User Error Protection',0.16,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'User Interface Aesthetics',0.08,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no4,'Accessibility',0.20,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no5,'Maturity',0.20,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no5,'Availability',0.25,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no5,'Fault-Tolerance',0.30,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no5,'Recoverability',0.25,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no6,'Confidentiality',0.15,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no6,'Integrity',0.25,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no6,'Non-repudiation',0.15,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no6,'Authenticity',0.25,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no6,'Accountability',0.20,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no7,'Modularity',0.15,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no7,'Reusability',0.25,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no7,'Analysability',0.15,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no7,'Modifiability',0.25,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no7,'Testability',0.20,0, 0, 0, 0, 0]);
-
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no8,'Adaptability',0.32,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no8,'Installability',0.27,0, 0, 0, 0, 0]);
-        DB::insert('insert into subkarakteristik (sk_id, k_id, sk_nama, bobot_relatif, ps_nilai, jumlah_responden, bobot_absolut, nilai_subfaktor, nilai_absolut) values(?,?,?,?,?,?,?,?,?)',
-        [$subkarakteristik++, $no8,'Replaceability',0.41,0, 0, 0, 0, 0]);
+        $kar = Karakteristik::where('a_id', 1)->get();
+        $sub = DB::table('subkarakteristik')
+        ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
+        ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
+        ->where('aplikasi.a_id',1)->get();
         
+        foreach ($kar as $k) {
+            DB::table('karakteristik')->insert([
+            ['a_id' => $aplikasi->a_id, 
+             'k_nama' => $k->k_nama,
+             'k_bobot' => $k->k_bobot,
+             'k_nilai' => 0
+            ],
+            ]);
+        }
+
+        $kar2 = Karakteristik::where('a_id', $aplikasi->a_id)->get();
+
+        foreach ($kar2 as $k2) {
+            foreach ($sub as $s) {
+                if ($s->k_nama == $k2->k_nama) {
+                    DB::table('subkarakteristik')->insert([
+                    ['k_id' => $k2->k_id, 
+                     'sk_nama' => $s->sk_nama,
+                     'bobot_relatif' => $s->bobot_relatif,
+                     'bobot_absolut' => 0,
+                     'nilai_subfaktor' => 0,
+                     'nilai_absolut' => 0,
+                     'jml_res' => 0,
+                     'total_per_sub' => 0
+                    ],
+                    ]);
+                }
+            }   
+        }
         
-        return redirect('/softwaretester/aplikasi')->with('success', 'item berhasil ditambahkan');
-      
+        return redirect()->route('custom.kar', $aplikasi->a_id);
     }
 
     public function delete($a_id){

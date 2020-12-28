@@ -19,13 +19,13 @@ class Karakteristik extends Model
         'k_nama', 'k_bobot',
     ];
 
-    public function subkarakteristik()
-    {
-        return $this->hasMany(\App\Subkarakteristik::class);
-    }
-
     public function aplikasi()
     {
         return $this->belongsTo(\App\Aplikasi::class,'a_id');
+    }
+
+    public function subkarakteristik()
+    {
+        return $this->hasMany(\App\SubKarakteristik::class);
     }
 }

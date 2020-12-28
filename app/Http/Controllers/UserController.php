@@ -29,7 +29,7 @@ class UserController extends Controller
             'email' => $request->email
         ]);
         // alihkan halaman ke halaman home users
-        return view('/home');
+        return view('/softwaretester/home');
     }
 
 }
