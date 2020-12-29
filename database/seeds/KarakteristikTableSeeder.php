@@ -26,7 +26,7 @@ class KarakteristikTableSeeder extends Seeder
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Compatibility',
-            'k_bobot' => 0.5,
+            'k_bobot' => 0.05,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([

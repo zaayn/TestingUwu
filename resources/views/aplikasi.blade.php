@@ -29,7 +29,7 @@
                     <th style="width: 5%">ID</th>
                     <th style="width: 25%">Nama User</th>
                     <th style="width: 25%">Nama Aplikasi</th>
-                    <th style="width: 15%">Custom Bobot</th>
+                    {{-- <th style="width: 15%">Custom Bobot</th> --}}
                     <th style="width: 15%">Ukur Aplikasi</th>
                     <th style="width: 15%">Aksi</th>
                   </thead>
@@ -40,11 +40,11 @@
                     <td>{{ $aplikasi->user->name }}</td>
                     <td>{{ $aplikasi->a_nama }}</td>
 
-                    <td>
+                    {{-- <td>
                       <a href="{{route('custom.kar',$aplikasi->a_id)}}" class="btn btn-info btn-sm">
                         <span class="fa fa-pencil"></span>
                       </a>
-                    </td>
+                    </td> --}}
 
                     <td>
                       <a href="{{route('nilai',$aplikasi->a_id)}}" class="btn btn-info btn-sm">

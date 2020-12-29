@@ -78,6 +78,7 @@ Route::group(['prefix' => 'softwaretester',  'middleware' => 'is_user'], functio
 	Route::get('/aplikasi/{id}/customkarakteristik', 'KarakteristikController@customkar')->name('custom.kar');
 	Route::get('/karakteristik/{id}/editbobot', 'KarakteristikController@editbobotkar')->name('edit.kar');
 	Route::post('/karakteristik/{id}/storebobot', 'KarakteristikController@storebobotkar')->name('store.kar');
+	Route::get('/aplikasi/{id}/karakteristik', 'KarakteristikController@viewkar')->name('view.kar');
 
 	//route subkarakteristik
 	Route::get('/aplikasi/{id}/customsubkarakteristik', 'SubkarakteristikController@customsub')->name('custom.sub');
@@ -85,10 +86,7 @@ Route::group(['prefix' => 'softwaretester',  'middleware' => 'is_user'], functio
 	Route::post('/subkarakteristik/{id}/storebobot', 'SubkarakteristikController@storebobotsub')->name('store.sub');
 
 	//automatic
-
-	Route::get('/automatic/{id}', 'PSController@index')->name('automatic');
-	Route::get('/uploadFile', 'UploadController@upload')->name('upload');
-	Route::post('/uploadFile/proses', 'UploadController@proses_upload')->name('proses');
+	Route::get('/capacity/{id}','AutomaticController@capacity')->name('capacity');
 
 	//Route Bobot Karakteristik
 	Route::get('/bobot','KarakteristikController@bobot')->name('view.bobot');

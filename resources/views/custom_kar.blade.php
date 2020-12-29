@@ -36,7 +36,7 @@
                     <th style="width: 5%">ID</th>
                     <th style="width: 30%">Nama Karakteristik</th>
                     <th style="width: 25%">Bobot Karakteristik</th>
-                    <th style="width: 20%">Edit Bobot</th>
+                   
                     <th style="width: 20%">Custom Subkarakteristik</th>
                   </thead>
                   <tbody>
@@ -45,11 +45,7 @@
                     <td>{{ $no++ }}</td>
                     <td>{{ $k->k_nama }}</td>
                     <td>{{ $k->k_bobot }}</td>
-                    <td>
-                        <a href="{{route('edit.kar',$k->k_id)}}" class="btn btn-info btn-sm">
-                        <span class="fa fa-pencil"></span>
-                        </a>
-                    </td>
+                    
                     <td>
                         <a href="{{route('custom.sub',$k->k_id)}}" class="btn btn-info btn-sm">
                         <span class="fa fa-pencil"></span>

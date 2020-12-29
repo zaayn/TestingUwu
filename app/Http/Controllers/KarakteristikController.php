@@ -27,6 +27,15 @@ class KarakteristikController extends Controller
         $data['no'] = 1;
         $data['aplikasis'] = Aplikasi::where('a_id',$a_id)->get();
         $data['karakteristiks'] = Karakteristik::where('a_id',$a_id)->get();
+
+        $data['total'] = DB::table('karakteristik')->where('a_id','=',$a_id)->sum('k_bobot');
+        return view('/edit_bobotkar', $data);
+    }
+    public function viewkar($a_id)
+    {
+        $data['no'] = 1;
+        $data['aplikasis'] = Aplikasi::where('a_id',$a_id)->get();
+        $data['karakteristiks'] = Karakteristik::where('a_id',$a_id)->get();
         return view('/custom_kar', $data);
     }
 
@@ -41,8 +50,12 @@ class KarakteristikController extends Controller
         $karakteristik = Karakteristik::findorFail($k_id);
 
         $karakteristik->k_bobot      = $request->k_bobot;
+        
+        // $aplikasi = Aplikasi::findorFail($karakteristik->aplikasi->a_id);
+        
+        
         if ($karakteristik->save()) {
-          return redirect()->route('custom.kar', $karakteristik->aplikasi->a_id)->with('success', 'item berhasil diubah');
+          return redirect()->route('custom.kar', $karakteristik->aplikasi->a_id);
         }    
     }
 

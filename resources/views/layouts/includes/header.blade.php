@@ -26,6 +26,7 @@
       <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
       <script src="{{asset('assets/js/plugins/jquery.datatables.min.js')}}"></script>
       <script src="{{asset('assets/js/plugins/datatables.bootstrap.min.js')}}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
       <!-- custom -->
       <script src="asset/js/main.js"></script>
       <script type="text/javascript">
@@ -33,6 +34,7 @@
           $('#datatables-example').DataTable();
         });
       </script>
+      
       <script type="text/javascript">
         function showTime() {
           var date = new Date(),

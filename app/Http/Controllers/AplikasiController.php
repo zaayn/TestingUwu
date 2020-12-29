@@ -106,8 +106,10 @@ class AplikasiController extends Controller
                 }
             }   
         }
+        $data['total'] = DB::table('karakteristik')->where('a_id','=',$aplikasi->a_id)->sum('k_bobot');
+        // return $total;
         
-        return redirect()->route('custom.kar', $aplikasi->a_id);
+        return redirect()->route('custom.kar', $aplikasi->a_id)->with($data);
     }
 
     public function delete($a_id){

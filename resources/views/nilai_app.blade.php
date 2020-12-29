@@ -55,9 +55,21 @@
                     <td>{{ $s->nilai_subfaktor }}</td>
                     <td>{{ $s->nilai_absolut }}</td>
                     @if ($s->nilai_absolut == 0)
-                      @if ($s->sk_nama == 'Capacity')
+                      @if ($s->sk_nama == 'Modularity')
                         <td>
-                          <a href="{{route('kuisioner',$s->sk_id)}}" class="btn btn-info btn-sm">
+                          <a href="{{route('kuisioner',$s->sk_id)}}" class="btn btn-success btn-sm">
+                            <span class="fa fa-plus"></span>
+                          </a>
+                        </td>
+                      @elseif ($s->sk_nama == 'Time Behaviour')
+                        <td>
+                          <a href="{{route('kuisioner',$s->sk_id)}}" class="btn btn-success btn-sm">
+                            <span class="fa fa-plus"></span>
+                          </a>
+                        </td>
+                      @elseif ($s->sk_nama == 'Capacity')
+                        <td>
+                          <a href="{{route('capacity',$s->sk_id)}}" class="btn btn-success btn-sm">
                             <span class="fa fa-plus"></span>
                           </a>
                         </td>
