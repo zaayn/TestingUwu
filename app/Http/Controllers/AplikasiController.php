@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Aplikasi;
 use App\Karakteristik;
-use App\Subkarakteristik;
+use App\SubKarakteristik;
 use App\PenilaianKarakteristik;
 use App\PenilaianSubKarakteristik;
 use Illuminate\Support\Facades\Storage;

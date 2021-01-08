@@ -41,7 +41,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="font-weight-bold">Bobot Karakteristik</label>
-                            <input type="text" class="form-control bobot" name="k_bobot" value="{{ $k->k_bobot }}" required>
+                            <input type="text" class="form-control k_bobot" name="k_k_bobot" value="{{ $k->k_k_bobot }}" required>
                         </div>
 
                         <div class="col-md-4" style="padding-top: 20px">
@@ -68,7 +68,7 @@
                 @endif
                    
               @endforeach    
-                {{-- <input type="text" id="total_bobot" disabled> --}}
+                {{-- <input type="text" id="total_k_bobot" disabled> --}}
                 <span class="info-box-number">{{$total}}</span>
             </div>
           </div>
@@ -78,31 +78,29 @@
       </div>  
     </div>
 </div>
-@section('js')
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 <script>  
 $(document).ready(function() {
-  $('#mydatatables').DataTable();
+  // $('#mydatatables').DataTable();
 })
 </script>
 <script>
   // we used jQuery 'keyup' to trigger the computation as the user type
-  $('.bobot').keyup(function () {
-   
+  $('.k_bobot').keyup(function () {
       // initialize the sum (total bobot) to zero
       var sum = 0;
        
       // we use jQuery each() to loop through all the textbox with 'bobot' class
       // and compute the sum for each loop
-      $('.bobot').each(function() {
-          sum += Number($(this).val());
+      $('.k_bobot').each(function() {
+          let val = Number($(this).val());
+          if(!isNaN(val))
+            sum += val;
       });
        
       // set the computed value to 'total_bobot' textbox
-      $('#total_bobot').val(sum);
+      $('.info-box-number').html(sum);
        
   });
-  </script>
-@endsection
-
-
+</script>

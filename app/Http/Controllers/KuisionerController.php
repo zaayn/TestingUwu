@@ -9,19 +9,19 @@ use Illuminate\Support\Facades\Hash;
 use App\Kuisioner;
 use App\Aplikasi;
 use App\Karakteristik;
-use App\Subkarakteristik;
+use App\SubKarakteristik;
 
 class KuisionerController extends Controller
 {
     public function kuis($sk_id)
     {
-        $data['subkarakteristiks'] = Subkarakteristik::where('sk_id',$sk_id)->get();
+        $data['subkarakteristiks'] = SubKarakteristik::where('sk_id',$sk_id)->get();
         return view('/kuisioner',$data);
     }
 
     public function update(Request $request, $sk_id)
     {
-        $subkarakteristik = Subkarakteristik::findorFail($sk_id);
+        $subkarakteristik = SubKarakteristik::findorFail($sk_id);
         
         $subkarakteristik->jml_res 			= $request->jml_res;
         $subkarakteristik->total_per_sub 	= $request->total_per_sub;

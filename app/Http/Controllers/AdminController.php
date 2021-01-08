@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-use App\Subkarakteristik;
+use App\SubKarakteristik;
 use App\Karakteristik;
 
 class AdminController extends Controller
@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function index()
     {
         $data['karakteristik'] = Karakteristik::count();
-        $data['subkarakteristik'] = Subkarakteristik::count();
+        $data['subkarakteristik'] = SubKarakteristik::count();
         $data['admin'] = User::where('role','admin')->count();
         $data['softwaretester'] = User::where('role','softwaretester')->count();
         return view('/admin/home_admin',$data);
@@ -49,7 +49,7 @@ class AdminController extends Controller
 
     public function tambahbobot()
     {
-        $data['subkarakteristiks'] = Subkarakteristik::all();
+        $data['subkarakteristiks'] = SubKarakteristik::all();
         return view('/admin/tambahbobot',$data);
     }
 

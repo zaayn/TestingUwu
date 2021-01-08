@@ -15,7 +15,7 @@ use App\Aplikasi;
 class AutomaticController extends Controller
 {
     public function capacity(Request $request, $sk_id){
-        $subkarakteristik = Subkarakteristik::findOrFail($sk_id);
+        $subkarakteristik = SubKarakteristik::findOrFail($sk_id);
         $url = $subkarakteristik->karakteristik->aplikasi->a_url;
 
         $temp = 0;
