@@ -163,6 +163,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        //PDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -179,6 +182,10 @@ return [
 
         // curl
         Ixudra\Curl\CurlServiceProvider::class,
+
+        //Lcom 
+        // Pattisahusiwa\Lcom\LcomVisitor::class,
+
     ],
 
     /*
@@ -230,6 +237,12 @@ return [
 
         // curl
         'Curl'          => Ixudra\Curl\Facades\Curl::class,
+
+        //PDF
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        //Lcom
+        // 'LcomVisitor'  => Pattisahusiwa\Lcom\LcomVisitor::class,
     ],
 
 ];

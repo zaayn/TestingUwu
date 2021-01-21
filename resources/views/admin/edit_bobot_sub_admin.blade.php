@@ -1,15 +1,18 @@
-@extends('layouts.app_topnav')
+@extends('layouts.app_admin')
 
-@section('content_header')
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel block">
-            <div class="panel-body">
-                <h1>Custom Subkarakteristik</h1>
-            </div>
-        </div>
-    </div>
-</div>
+@section('content_header') 
+  <div class="col-md-12">
+      <div class="panel block">
+          <div class="panel-body">
+              <h1>Edit Bobot Subkarakteristik</h1>
+              <ol class="breadcrumb">
+                <li><a href="{{asset('/admin/home')}}"></i>Home</a></li>
+                <li><a href="{{asset('/admin/subkarakteristik')}}"></i>Subkarakteristik</a></li>
+                <li class="active">Edit bobot Subkarakteristik</li>
+              </ol>
+          </div>
+      </div>
+  </div>
 @endsection
 
 @section('content')
@@ -24,28 +27,26 @@
                 <tr>
                   <th>ID</th>
                   <th>Nama Subkarakteristik</th>
-                  <th>Bobot Subkarakteristik</th>
+                  <th>Bobot Subkarakteristik
+                    <a id="belom" data-toggle="popover" title="Warning" data-content="Total dari karakteristik Harus sama dengan 1. Lihat dibawah untuk mengetahui hasil saat ini" href="#"><span class="badge badge-danger">?</span></a>
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($subkarakteristiks as $s)
+                @foreach($subkarakteristiks as $subs)
                 <tr>
                     <td>{{ $no++}}</td>
-                    <td>{{ $s->sk_nama }}</td>
-                    <td>{{ $s->bobot_relatif }}</td>
+                    <td>{{ $subs->sk_nama }}</td>
+                    <td>{{ $subs->bobot_relatif }}</td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
-            <span class="info-box-number">{{$total}}</span><br>
-            <a class="btn btn-info btn-sm" id="belom"  >
-              <span>belom</span>
-            </a>
-            @foreach($aplikasis as $app)
-            <a href="{{route('custom.kar',$app->a_id)}}" id="next" class="btn btn-info btn-sm"  >
-              <span>Next</span>
-            </a>
-            @endforeach
+            <table class="table table-bordered">
+                <tr>
+                  <td style="text-align: center">Total : <span class="info-box-number">{{$total}}</span></td>
+                </tr>
+            </table>
           </div>
       </div>
     </div>
@@ -76,7 +77,7 @@ $(document).ready(function(){
   });
 
   $('#editable').Tabledit({
-    url:'{{ route("action.sub") }}',
+    url:'{{ route("action.sub.admin") }}',
     dataType:"json",
     columns:{
       identifier:[0, 'sk_id'],
@@ -112,5 +113,10 @@ $(document).ready(function(){
   });
 
 });  
+</script>
+<script>
+	$(document).ready(function(){
+	  $('[data-toggle="popover"]').popover();
+	});
 </script>
 @endsection

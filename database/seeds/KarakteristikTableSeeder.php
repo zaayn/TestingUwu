@@ -14,49 +14,49 @@ class KarakteristikTableSeeder extends Seeder
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Functional Suitability',
-            'k_bobot' => 0.21,
+            'k_bobot' => 0.32,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Performance Efficiency',
-            'k_bobot' => 0.24,
+            'k_bobot' => 0.06,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Compatibility',
-            'k_bobot' => 0.05,
+            'k_bobot' => 0.04,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Usability',
-            'k_bobot' => 0.12,
+            'k_bobot' => 0.19,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Reliability',
-            'k_bobot' => 0.08,
+            'k_bobot' => 0.09,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Security',
-            'k_bobot' => 0.20,
+            'k_bobot' => 0.12,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Maintainability',
-            'k_bobot' => 0.05,
+            'k_bobot' => 0.14,
             'k_nilai' => 0
         ]);
         \App\Karakteristik::create([
             'a_id'  => 1,
             'k_nama' => 'Portability',
-            'k_bobot' => 0.05,
+            'k_bobot' => 0.04,
             'k_nilai' => 0
         ]);
     }

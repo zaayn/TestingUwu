@@ -8,7 +8,7 @@
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <title>Testing App</title>
+    <title>Aplikasi Pengukuran Kualitas Perangkat Lunak ISO 25010</title>
 
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
@@ -29,12 +29,12 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
       <!-- custom -->
       <script src="{{ asset("assets/js/main.js") }}"></script>
+      <script src="asset/js/main.js"></script>
       <script type="text/javascript">
         $(document).ready(function(){
           $('#datatables-example').DataTable();
         });
       </script>
-      
       <script type="text/javascript">
         function showTime() {
           var date = new Date(),
@@ -65,7 +65,7 @@
           <div class="col-md-12 nav-wrapper">
             <div class="navbar-header" style="width:100%;">
               <a href="home" class="navbar-brand"> 
-                 <b>Testing Application</b>
+                 <b>Aplikasi Pengukuran Kualitas Perangkat Lunak ISO 25010</b>
               </a>               
               <ul class="nav navbar-nav navbar-right user-nav">
                 <li class="user-name"><span>{{ Auth::user()->name }}</span></li>

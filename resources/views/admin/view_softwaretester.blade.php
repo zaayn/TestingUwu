@@ -1,19 +1,20 @@
-@include('layouts.includes.admin_header')
-@include('layouts.includes.admin_leftmenu')
-@section('content')
+@extends('layouts.app_admin')
 
-<div id="content">
-  <div class="panel box-shadow-none content-header">
-     <div class="panel-body">
-       <div class="col-md-12">
-           <h3 class="animated fadeInLeft">Kelola Software Tester</h3>
-           <p class="animated fadeInDown">
-            Home <span class="fa-angle-right fa"></span> Kelola Software Tester
-        </p>
+@section('content_header') 
+  <div class="col-md-12">
+      <div class="panel block">
+          <div class="panel-body">
+              <h1>Software Tester</h1>
+              <ol class="breadcrumb">
+                  <li><a href="{{asset('/admin/softwaretesterview')}}"></i>Admin</a></li>
+                  <li class="active">Software Tester</li>
+              </ol>
+          </div>
       </div>
-    </div>
   </div>
+@endsection
 
+@section('content')
  <div class="col-md-12 top-20 padding-0">
     <div class="col-md-12">
       <div class="panel">
@@ -44,6 +45,6 @@
       </div>
     </div>
 </div>
-
+@endsection
 
 

@@ -1,93 +1,129 @@
-@include('layouts.includes.admin_header')
-@include('layouts.includes.admin_leftmenu')
-@section('content')
+@extends('layouts.app_admin')
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-  <meta charset="utf-8">
-  <meta name="description" content="Testing Application">
-  <meta name="keyword" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testing Application</title>
-
-  <!-- start: Css -->
-  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
-
-  <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/nouislider.min.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/select2.min.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/bootstrap-material-datetimepicker.css"/>
-  <link href="asset/css/style.css" rel="stylesheet">
-  <!-- end: Css -->
-
-
-  <div class="form-group"><label class="col-sm-2 control-label text-right">Password</label>
-  		<div class="col-sm-10"><input type="password" class="form-control"></div>
+@section('content_header') 
+  <div class="col-md-12">
+      <div class="panel block">
+          <div class="panel-body">
+              <h1>Edit Bobot Karakteristik</h1>
+              <ol class="breadcrumb">
+                <li><a href="{{asset('/admin/home')}}"></i>Home</a></li>
+                <li><a href="{{asset('/admin/karakteristik')}}"></i>Karakteristik</a></li>
+                <li class="active">Edit bobot Karakteristik</li>
+              </ol>
+          </div>
+      </div>
   </div>
+@endsection
 
-
-<!-- start: Content -->
-            <div id="content">
-                <div class="panel box-shadow-none content-header">
-                  <div class="panel-body">
-                    <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">BOBOT RELATIF</h3>
-                        <!--<p class="animated fadeInDown">
-                          Form <span class="fa-angle-right fa"></span> Form Element
-                        </p>-->
-                    </div>
-                  </div>
-                </div>
-      
-        <div class="col-md-12 top-20 padding-0">
-          <div class="col-md-12">
-            <div class="panel">
-              <div class="panel-heading"><h3>Daftar SubKarakteristik</h3></div>
-                <div class="panel-body">
-                  <a href="{{asset('/admin/karakteristik')}}" class="btn btn-info btn-md">Karakteristik</a><br><br>
-                  <div class="responsive-table">
-                    <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                      <thead>
-                        <th>ID</th>
-                        <th>Karakteristik</th>
-                        <th>Nama SubKarakteristik</th>
-                        <th>Bobot Relatif</th>
-                        <th>Aksi</th>
-                      </thead>
-                      <tbody>
-                      @foreach($subkarakteristiks as $subkarakteristik)
-                      <tr>
-                        <td>{{ $subkarakteristik->sk_id }}</td>
-                        <td>{{ $subkarakteristik->karakteristik->k_nama }}</td>
-                        <td>{{ $subkarakteristik->sk_nama }}</td>
-                        <td>{{ $subkarakteristik->bobot_relatif }}</td>
-      
-                        <td>
-                          <a href="{{route('edit.sub',$subkarakteristik->sk_id)}}" class="btn btn-info btn-sm">
-                            <span class="fa fa-pencil"></span>
-                          </a>
-                          <a onclick="return confirm('Apakah anda yakin akan menghapus data ini ?')" href="#" class="btn btn-danger btn-sm">
-                            <span class="fa fa-trash"></span>
-                          </a>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-                <a href="#" class="btn btn-info btn-md">Tambah Subkarakteristik</a>
-              </div>
-            </div>
+@section('content')
+<div class="col-md-12 top-20 padding-0">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="table-responsive">
+            {{ csrf_field() }}
+            <table id="editable" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nama Karakteristik</th>
+                  <th>Bobot Karakteristik
+                      <a id="belom" data-toggle="popover" title="Warning" data-content="Total dari karakteristik Harus sama dengan 1. Lihat dibawah untuk mengetahui hasil saat ini" href="#"><span class="badge badge-danger">?</span></a>
+                  </th>
+                  <th>Edit Bobot SubKarakteristik</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($karakteristiks as $karakteristik)
+                <tr>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $karakteristik->k_nama }}</td>
+                  <td>{{ $karakteristik->k_bobot }}</td>
+                  
+                  <td>
+                    <a href="{{route('edit.sub.admin', $karakteristik->k_id)}}" >
+                      <span class="fa fa-external-link"></span>
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+            <table class="table table-bordered">
+              <tr>
+                <td style="text-align: center">Total :<span class="info-box-number">{{$total}}</span></td>
+              </tr>
+            </table>
           </div>
       </div>
     </div>
+  </div>
+</div>
+@endsection
 
-                
+@section('js')
+<script type="text/javascript">
+function toggleNext(sum){
+  if(sum == 1){
+    $("#next").show();
+    $("#belom").hide();
+  }
+  else{
+    $("#next").hide();
+    $("#belom").show();
+  }
+}
 
+$(document).ready(function(){
+  toggleNext(Number($('.info-box-number').html()));
+
+  $.ajaxSetup({
+    headers:{
+      'X-CSRF-Token' : $("input[name=_token]").val()
+    }
+  });
+
+  $('#editable').Tabledit({
+    url:'{{ route("action.edit.kar") }}',
+    dataType:"json",
+    columns:{
+      identifier:[0, 'k_id'],
+      editable:[[2, 'k_bobot']]
+    },
+    deleteButton:false,
+    restoreButton:false,
+    onAlways:function(){
+      var sum = 0;
+       
+      // we use jQuery each() to loop through all the textbox with 'bobot' class
+      // and compute the sum for each loop
+      $('input[name="k_bobot"]').each(function() {
+          let val = Number($(this).val());
+          if(!isNaN(val))
+            sum += val;
+          if(sum == 0.30000000000000004)
+          sum = 0.3
+      });
+       
+      // set the computed value to 'total_bobot' textbox
+      $('.info-box-number').html(sum);
+
+      toggleNext(sum);
+    },
+    onSuccess:function(data, textStatus, jqXHR)
+    {
+      if(data.action == 'delete')
+      {
+        $('#'+data.k_id).remove();
+      }
+    }
+  });
+
+});  
+</script>
+<script>
+	$(document).ready(function(){
+	  $('[data-toggle="popover"]').popover();
+	});
+</script>
+@endsection
