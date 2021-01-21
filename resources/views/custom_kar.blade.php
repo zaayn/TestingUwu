@@ -50,6 +50,9 @@
                 <td style="text-align: center">Total :<span class="info-box-number">{{$total}}</span></td>
               </tr>
             </table>
+            <a href="{{route('nilai',$id_aplikasi)}}" id="next" class="btn btn-info btn-sm"  >
+              <span>Submit</span>
+            </a>
           </div>
       </div>
     </div>
