@@ -37,10 +37,11 @@
                 @endforeach
               </tbody>
             </table>
-            <span class="info-box-number">{{$total}}</span><br>
-            <a class="btn btn-info btn-sm" id="belom"  >
-              <span>belom</span>
-            </a>
+            <table class="table table-bordered">
+              <tr>
+                <td style="text-align: center">Total : <span class="info-box-number">{{$total}}</span></td>
+              </tr>
+            </table>
             @foreach($aplikasis as $app)
             <a href="{{route('custom.kar',$app->a_id)}}" id="next" class="btn btn-info btn-sm"  >
               <span>Next</span>
