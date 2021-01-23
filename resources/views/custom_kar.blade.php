@@ -33,7 +33,7 @@
               <tbody>
                 @foreach($karakteristiks as $row)
                 <tr>
-                  <td>{{ $no++ }}</td>
+                  <td>{{ $row->k_id }}</td>
                   <td>{{ $row->k_nama }}</td>
                   <td>{{ $row->k_bobot }}</td>
                   <td>
