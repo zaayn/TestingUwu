@@ -102,8 +102,7 @@ Route::group(['prefix' => 'softwaretester',  'middleware' => 'is_user'], functio
 	Route::get('/aplikasi/{id}/pengukuran', 'AplikasiController@hasil')->name('hasil');
 
 	//Route Download PDF
-	Route::get('/aplikasi/{id}/cetak', 'AplikasiController@cetak_pdf')->name('cetak_pdf');
+	Route::get('/aplikasi/cetak', 'AplikasiController@cetak_pdf')->name('cetak_pdf');
 
-	// Route::get('/customer/print-pdf','AplikasiController@cetak_pdf')->name('customer.printpdf');
 
 });

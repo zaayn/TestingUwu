@@ -168,10 +168,6 @@ class SubkarakteristikTableSeeder extends Seeder
             'sk_nama' => 'Installability',
             'bobot_relatif' => 0.75
         ]);
-        \App\SubKarakteristik::create([
-            'k_id'  => 8,
-            'sk_nama' => 'Replaceability',
-            'bobot_relatif' => 0.00
-        ]);
     }
 }
+    

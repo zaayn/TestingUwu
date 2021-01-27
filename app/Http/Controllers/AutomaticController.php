@@ -18,7 +18,9 @@ class AutomaticController extends Controller
         
     }
     public function capacity(Request $request, $sk_id)
-    {    
+    {   
+        $seconds = 5000;
+        set_time_limit($seconds);
         $subkarakteristik = SubKarakteristik::findOrFail($sk_id);
         $url = $subkarakteristik->karakteristik->aplikasi->a_url;
 
@@ -29,7 +31,7 @@ class AutomaticController extends Controller
       //create the array of cURL handles and add to a multi_curl
         $mh = curl_multi_init();
         // foreach ($urls as $key => $url) 
-        for ($key=0;$key<100;$key++){
+        for ($key=0;$key<7000;$key++){
             $chs[$key] = curl_init($url);
             curl_setopt($chs[$key], CURLOPT_RETURNTRANSFER, true);
             curl_setopt($chs[$key], CURLOPT_POST, true);
@@ -63,7 +65,8 @@ class AutomaticController extends Controller
         
         // close current handler
         curl_multi_close($mh);
-        $subkarakteristik->nilai_subfaktor = $temp;
+        $hasil = $temp/70;
+        $subkarakteristik->nilai_subfaktor = $hasil;
         $subkarakteristik->bobot_absolut 	= $subkarakteristik->karakteristik->k_bobot * $subkarakteristik->bobot_relatif;
         $subkarakteristik->nilai_absolut 	= $subkarakteristik->bobot_absolut * $subkarakteristik->nilai_subfaktor;
         

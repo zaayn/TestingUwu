@@ -159,6 +159,7 @@ class AplikasiController extends Controller
         }
     }
 
+    //HAPUS APLIKASI
     public function delete($a_id){
         $aplikasi = Aplikasi::findOrFail($a_id);
         $apps_id = $aplikasi->a_id;
@@ -179,7 +180,9 @@ class AplikasiController extends Controller
         $subkarakteristiks = DB::table('subkarakteristik')
                                     ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
                                     ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
-                                    ->where('aplikasi.a_id',$a_id)->get();      
+                                    ->where('karakteristik.k_nama','=','maintainability')
+                                    ->where('aplikasi.a_id',$a_id)->get(); 
+           
         $rowspan = [];
         foreach ($subkarakteristiks as $key => $value)
             if(!@$rowspan[$value->k_nama])
@@ -193,27 +196,28 @@ class AplikasiController extends Controller
     }
 
     //CETAK PDF
-    // public function cetak_pdf($a_id)
-    // {
-    //     set_time_limit(300);
-    //     $data['no'] = 1;
-    //     $data['aplikasis'] = Aplikasi::where('a_id',$a_id)->get();
-    //     $subkarakteristiks = DB::table('subkarakteristik')
-    //                                 ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
-    //                                 ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
-    //                                 ->where('aplikasi.a_id',$a_id)->get();      
-    //     $rowspan = [];
-    //     foreach ($subkarakteristiks as $key => $value)
-    //         if(!@$rowspan[$value->k_nama])
-    //             $rowspan[$value->k_nama] = 1;
-    //         else
-    //             $rowspan[$value->k_nama]++;
+    public function cetak_pdf($a_id)
+    {
+        // set_time_limit(300);
+        // $data['no'] = 1;
+        // $data['aplikasis'] = Aplikasi::where('a_id',$a_id)->get();
+        // $subkarakteristiks = DB::table('subkarakteristik')
+        //                             ->join('karakteristik', 'karakteristik.k_id', '=', 'subkarakteristik.k_id')
+        //                             ->join('aplikasi','aplikasi.a_id','=','karakteristik.a_id')
+        //                             ->where('aplikasi.a_id',$a_id)->get();      
+        // $rowspan = [];
+        // foreach ($subkarakteristiks as $key => $value)
+        //     if(!@$rowspan[$value->k_nama])
+        //         $rowspan[$value->k_nama] = 1;
+        //     else
+        //         $rowspan[$value->k_nama]++;
 
-    //     $data['subkarakteristiks'] = $subkarakteristiks;
-    //     $data['rowspan'] = $rowspan;
+        // $data['subkarakteristiks'] = $subkarakteristiks;
+        // $data['rowspan'] = $rowspan;      
+        // return view('/hasil_ukur', $data);
 
-    //     $pdf = PDF::loadView('pdf', $data);  
-    //     // return $pdf->download('laporan_pengukuran.pdf');
-    //     return $pdf->stream();
-    // }
+        // $pdf = PDF::loadView('pdf', $data);  
+        // return $pdf->download('laporan_pengukuran.pdf');
+        // return $pdf->stream();
+    }
 }

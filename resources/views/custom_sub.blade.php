@@ -24,13 +24,15 @@
                 <tr>
                   <th>ID</th>
                   <th>Nama Subkarakteristik</th>
-                  <th>Bobot Subkarakteristik</th>
+                  <th>Bobot Subkarakteristik
+                    <a id="belom" data-toggle="popover" title="Warning" data-content="Total dari subkarakteristik Harus sama dengan 1. Lihat dibawah untuk mengetahui hasil saat ini" href="#"><span class="badge badge-danger">?</span></a>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($subkarakteristiks as $s)
                 <tr>
-                    <td>{{ $no++}}</td>
+                    <td>{{ $s->sk_id}}</td>
                     <td>{{ $s->sk_nama }}</td>
                     <td>{{ $s->bobot_relatif }}</td>
                 </tr>
@@ -39,11 +41,12 @@
             </table>
             <table class="table table-bordered">
               <tr>
-                <td style="text-align: center">Total : <span class="info-box-number">{{$total}}</span></td>
+                <td style="text-align: center">Total :<span class="info-box-number">{{$total}}</span></td>
               </tr>
             </table>
+            
             @foreach($aplikasis as $app)
-            <a href="{{route('custom.kar',$app->a_id)}}" id="next" class="btn btn-info btn-sm"  >
+            <a style="height: 40px" href="{{route('custom.kar',$app->a_id)}}" id="next" class="btn btn-info btn-sm col-md-12"  >
               <span>Next</span>
             </a>
             @endforeach
@@ -113,5 +116,10 @@ $(document).ready(function(){
   });
 
 });  
+</script>
+<script>
+	$(document).ready(function(){
+	  $('[data-toggle="popover"]').popover();
+	});
 </script>
 @endsection
